@@ -29,6 +29,7 @@ int main()
 					cout << "Pavarde" << setw(15) << "Vardas" << setw(20) << "Galutinis(Vid.)" << endl;
 					cout << "---------------------------------------------" << endl;
 					for (int i = 0; i < list.size(); i++) { cout << list[i]; }
+					cout << "---------------------------------------------" << endl;
 					cout << endl << "1 = Return To Main Menu" << endl;
 					cin >> provisional;
 					if (provisional == 1) { system("CLS"); possibility = scholar.Menu(); };
@@ -37,6 +38,7 @@ int main()
 					cout << "Pavarde" << setw(15) << "Vardas" << setw(20) << "Galutinis(Med.)" << endl;
 					cout << "---------------------------------------------" << endl;
 					for (int i = 0; i < list.size(); i++) { list[i].PrintMedian(); }
+					cout << "---------------------------------------------" << endl;
 					cout << endl << "1 = Return To Main Menu" << endl;
 					cin >> provisional;
 					if (provisional == 1) { system("CLS"); possibility = scholar.Menu(); };
@@ -71,6 +73,7 @@ int main()
 					cout << "Pavarde" << setw(13) << "Vardas" << setw(25) << "FinalScore(avg/med)" << setw(15) << endl;
 					cout << "---------------------------------------------" << endl;
 					for (int i = 0; i < list.size(); i++) { list[i].PrintFile(); }
+					cout << "---------------------------------------------" << endl;
 					cout << endl << "1 = Return To Main Menu" << endl;
 					cin >> provisional;
 					if (provisional == 1) { system("CLS"); possibility = scholar.Menu(); };
