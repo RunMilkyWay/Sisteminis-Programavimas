@@ -5,11 +5,15 @@ Student::Student() {
 	surname = "Null";
 	final = 1;
 };
-Student::Student(string xname, string xsurname, vector<int>xgrades, double xfinal) {
+Student::Student(string xname, string xsurname, std::deque<int>xgrades, double xfinal) {
 	name = xname;
 	surname = xsurname;
 	grades = xgrades;
 	final = xfinal;
+	double mathxx = std::accumulate(grades.begin(), grades.end(), 0.0) / grades.size();
+	double fscore = (0.4 * mathxx) + (0.6 * final);
+	final = fscore;
+
 };
 
 Student::~Student() {
@@ -34,13 +38,19 @@ void Student::DeleteGrades() {
 int Student::Menu() {
 	int temp;
 	cout << "--------------------MENU--------------------" << endl;
-	cout << "********************************************" << endl;
+	cout << "******************************************v0.1" << endl;
 	cout << "1 = Enter Students data" << endl;
-	cout << "2 = Read Students data /w Avarage " << endl;
-	cout << "3 = Read Students data /w Median" << endl;
-	cout << "4 = Read FILE + Sort by name (avg/med) " << endl;
+	//cout << "2 = Read Students data " << endl;
+	cout << "2 = Read Students data " << endl;
+	cout << "3 = Read FILE + Sort by name (avg/med) " << endl;
+	cout << "******************************************v0.2" << endl;
+	cout << "4 = Generate 10k, 100k, 1000k RNG Student file" << endl;
+	cout << "5 = Read Students from a file 10,000    + sort" << endl;
+	cout << "6 = Read Students from a file 100,000   + sort" << endl;
+	cout << "7 = Read Students from a file 1,000,000 + sort" << endl;
+	cout << "8 = Export Data sorted by above/below grade 5" << endl;
 	cout << "--------------------------------------------" << endl;
-	cout << "5 = Exit " << endl;
+	cout << "10 = Exit " << endl;
 	cout << "********************************************" << endl;
 	cin >> temp;
 	system("CLS");
@@ -49,17 +59,18 @@ int Student::Menu() {
 };
 
 void Student::PrintMedian() {
-	double math = std::accumulate(grades.begin(), grades.end(), 0.0) / grades.size();
-	double fscore = (0.4 * math) + (0.6 * final);
-	std::nth_element(grades.begin(), grades.begin() + grades.size() / 2, grades.end());
-	cout << left << setw(15) << surname << left << setw(15) << name << std::setprecision(2) << fscore << "/" << "(" << grades[grades.size() / 2] << ")" << endl;
+	//double math = std::accumulate(grades.begin(), grades.end(), 0.0) / grades.size();
+	//double fscore = (0.4 * math) + (0.6 * final);
+	//std::nth_element(grades.begin(), grades.begin() + grades.size() / 2, grades.end());
+	//cout << left << setw(15) << surname << left << setw(15) << name << std::setprecision(2) << final << "/" << "(" << grades[grades.size() / 2] << ")" << endl;
+	//v0.2 nebenaudojama
+	cout << left << setw(15) << surname << left << setw(15) << name << std::setprecision(2) << final << endl;
 }
 
 void Student::PrintFile() {
 	double math = std::accumulate(grades.begin(), grades.end(), 0.0) / grades.size();
-	double fscore = (0.4 * math) + (0.6 * final);
 	std::nth_element(grades.begin(), grades.begin() + grades.size() / 2, grades.end());
-	cout << left << setw(15) << surname << left << setw(15) << name << std::setprecision(2) << fscore << "/" << std::setprecision(2) << "(" << math << ")" << "(" << grades[grades.size() / 2]<<")" << endl;
+	cout << left << setw(15) << surname << left << setw(15) << name << std::setprecision(2) << final << "/" << std::setprecision(2) << "(" << math << ")" << "(" << grades[grades.size() / 2]<<")" << endl;
 
 };
 
@@ -98,7 +109,7 @@ std::istream& operator >>(std::istream& input, Student& x) {
 		}
 	};
 	cout << "**********************************************************************" << endl;
-	cout << endl << "Iveskite Egzamino pazymi :";
+	cout << endl << "Enter final exam grade :";
 	cin >> x.final;
 	system("CLS");
 	cout << "Student data saved" << endl;
@@ -122,4 +133,8 @@ int wordnum(string wordnume) {
 		++countinger;
 	};
 	return countinger;
+};
+
+double Student::GetFinal() {
+	return final;
 };
