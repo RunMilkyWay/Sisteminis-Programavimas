@@ -8,6 +8,9 @@
 #include <sstream>
 #include <algorithm>
 #include <fstream>
+#include <chrono>
+#include <deque>
+#include <list>
 
 using std::cout;
 using std::cout;
@@ -21,6 +24,7 @@ using std::vector;
 using std::endl;
 using std::istream;
 using std::ostream;
+
 
 #include "Class.h"
 

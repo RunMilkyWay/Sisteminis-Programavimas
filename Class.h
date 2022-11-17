@@ -3,19 +3,20 @@
 
 class Student {
 private:
-	string surname;
-	vector<int> grades;
-	double final;
+	std::deque<int> grades;
 public:
+	double final, capture;
+	string surname;
 	string name;											
 	Student();												
-	Student(string, string, vector<int>, double);			
+	Student(string, string, std::deque<int>, double);			
 	Student(const Student& p1);			
 	//Student& operator=(const Student& rhs); breaks sort
-	~Student();												
+	~Student();		
+	double GetFinal();
 	int Menu();
 	void DeleteGrades();
-	void PrintMedian();
+	void PrintData();
 	void PrintFile();
 	friend std::istream& operator >>(std::istream& input, Student& x);			
 	friend std::ostream& operator <<(std::ostream& output, const Student& x);	
