@@ -5,7 +5,7 @@ class Student {
 private:
 	std::deque<int> grades;
 public:
-	double final;
+	double final, capture;
 	string surname;
 	string name;											
 	Student();												
@@ -16,7 +16,7 @@ public:
 	double GetFinal();
 	int Menu();
 	void DeleteGrades();
-	void PrintMedian();
+	void PrintData();
 	void PrintFile();
 	friend std::istream& operator >>(std::istream& input, Student& x);			
 	friend std::ostream& operator <<(std::ostream& output, const Student& x);	

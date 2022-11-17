@@ -37,33 +37,27 @@ void Student::DeleteGrades() {
 
 int Student::Menu() {
 	int temp;
-	cout << "--------------------MENU--------------------" << endl;
-	cout << "******************************************v0.1" << endl;
-	cout << "1 = Enter Students data" << endl;
-	//cout << "2 = Read Students data " << endl;
-	cout << "2 = Read Students data " << endl;
-	cout << "3 = Read FILE + Sort by name (avg/med) " << endl;
-	cout << "******************************************v0.2" << endl;
+	cout << "----------------------MENU----------------------" << endl;
+	cout << "********************************************v1.0" << endl;
+	cout << "1 = Add Student " << endl;
+	cout << "2 = Print All Students " << endl;
+	cout << "3 = Print All Students + Sort By Surname " << endl;
 	cout << "4 = Generate 10k, 100k, 1000k RNG Student file" << endl;
-	cout << "5 = Read Students from a file 10,000    + sort" << endl;
-	cout << "6 = Read Students from a file 100,000   + sort" << endl;
-	cout << "7 = Read Students from a file 1,000,000 + sort" << endl;
-	cout << "8 = Export Data sorted by above/below grade 5" << endl;
-	cout << "--------------------------------------------" << endl;
+	cout << "5 = Add Students from a file 10,000    + sort" << endl;
+	cout << "6 = Add Students from a file 100,000   + sort" << endl;
+	cout << "7 = Add Students from a file 1,000,000 + sort" << endl;
+	cout << "8 = Delete Student from the Student data list" << endl;
+	cout << "9 = Export Data sorted by above/below grade '5'" << endl;
+	cout << "------------------------------------------------" << endl;
 	cout << "10 = Exit " << endl;
-	cout << "********************************************" << endl;
+	cout << "************************************************" << endl;
 	cin >> temp;
 	system("CLS");
 	return temp;
 
 };
 
-void Student::PrintMedian() {
-	//double math = std::accumulate(grades.begin(), grades.end(), 0.0) / grades.size();
-	//double fscore = (0.4 * math) + (0.6 * final);
-	//std::nth_element(grades.begin(), grades.begin() + grades.size() / 2, grades.end());
-	//cout << left << setw(15) << surname << left << setw(15) << name << std::setprecision(2) << final << "/" << "(" << grades[grades.size() / 2] << ")" << endl;
-	//v0.2 nebenaudojama
+void Student::PrintData() {
 	cout << left << setw(15) << surname << left << setw(15) << name << std::setprecision(2) << final << endl;
 }
 
