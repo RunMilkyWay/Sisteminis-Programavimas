@@ -7,12 +7,13 @@ int main()
 	Student scholar;
 	int possibility = 0;
 	int provisional = 0;
-	double timer10k, timer100k, timer1000k, timeadd10k, timeadd100k, timeadd1000k, offload, offload2 = 0;
-	int generated = 1;
+	double timer10k, timer100k, timer1000k, timeadd10k, timeadd100k, timeadd1000k, offload = 0;
+	string tempname, tempsurname;
+	int generated = 0;
 	possibility = scholar.Menu();
 	while (possibility != 0) {
 		try{
-			if (possibility < 0 or possibility >12) {
+			if (possibility < 0 or possibility >10) {
 				throw 404;
 			};	
 				while (possibility == 1) {
@@ -27,52 +28,17 @@ int main()
 					if (provisional == 2) { system("CLS"); possibility = scholar.Menu(); };
 					system("CLS");
 				};
-			/*	while (possibility == 9999999) {
-					cout << "Pavarde" << setw(15) << "Vardas" << setw(20) << "Galutinis(Vid.)" << endl;
-					cout << "---------------------------------------------" << endl;
-					for (int i = 0; i < list.size(); i++) { cout << list[i]; }
-					cout << "---------------------------------------------" << endl;
-					cout << endl << "1 = Return To Main Menu" << endl;
-					cin >> provisional;
-					if (provisional == 1) { system("CLS"); possibility = scholar.Menu(); };
-				};*/
 				while (possibility == 2) {
 					cout << "Pavarde" << setw(15) << "Vardas" << setw(20) << "Galutinis(Med.)" << endl;
 					cout << "---------------------------------------------" << endl;
-					for (int i = 0; i < list.size(); i++) { list[i].PrintMedian(); }
+					for (int i = 0; i < list.size(); i++) { list[i].PrintData(); }
 					cout << "---------------------------------------------" << endl;
 					cout << endl << "1 = Return To Main Menu" << endl;
 					cin >> provisional;
 					if (provisional == 1) { system("CLS"); possibility = scholar.Menu(); };
 				};
 				while (possibility == 3) {
-					static int checked = 0;
-					if (checked == 0) {
-						std::ifstream datafile;
-						datafile.open("data.txt");
-						string str = "null", fname = "null", fsurname = "null";
-						double fscore = 0;
-						string arr[50];
-						std::getline(datafile, str);
-						int counter = wordnum(str);
-						while (datafile.peek() != EOF) {
-							std::getline(datafile, str);
-							std::stringstream ss(str);
-							for (int i = 0; i < counter; i++) {
-								ss >> arr[i];
-								if (i == 0) { fname = arr[i]; }
-								else if (i == 1) { fsurname = arr[i]; }
-								else if (i > 1 and i + 1 < counter) { fgrades.push_back(stoi(arr[i])); }
-								else if (i + 1 == counter) { fscore = stoi(arr[i]); }
-							};
-							Student scholar(fname, fsurname, fgrades, fscore);
-							list.push_back(scholar);
-							fgrades.clear();
-						};
-						checked++;
-						std::sort(list.begin(), list.end(), [](const Student& lhs, const Student& rhs) {return lhs.name < rhs.name;});
-					};
-					std::sort(list.begin(), list.end(), [](const Student& lhs, const Student& rhs) {return lhs.name < rhs.name;});
+					std::sort(list.begin(), list.end(), [](Student& lhs, Student& rhs) {return lhs.GetName() < rhs.GetName();});
 					cout << "Pavarde" << setw(13) << "Vardas" << setw(25) << "FinalScore(avg/med)" << setw(15) << endl;
 					cout << "---------------------------------------------" << endl;
 					for (int i = 0; i < list.size(); i++) { list[i].PrintFile(); }
@@ -206,7 +172,7 @@ int main()
 							timer10k = elapsed_seconds.count();
 							checked++;
 							datafile.close();
-							std::sort(list.begin(), list.end(), [](const Student& lhs, const Student& rhs) {return lhs.final < rhs.final;});
+							std::sort(list.begin(), list.end(), [](Student& lhs, Student& rhs) {return lhs.GetFinal() < rhs.GetFinal();});
 						};
 
 
@@ -259,7 +225,7 @@ int main()
 							};
 							checked++;
 							datafile.close();
-							std::sort(list.begin(), list.end(), [](const Student& lhs, const Student& rhs) {return lhs.final < rhs.final;});
+							std::sort(list.begin(), list.end(), [](Student& lhs, Student& rhs) {return lhs.GetFinal() < rhs.GetFinal();});
 						};
 						cout << endl << endl << "100,000 Students has been added in :" << timer100k << " seconds!" << endl;
 						cout << "---------------------------------------------" << endl;
@@ -282,7 +248,7 @@ int main()
 						static int checked = 0;
 						if (checked == 0) {
 							std::ifstream datafile;
-							datafile.open("1000k.txt");
+							datafile.open("1000kk.txt");
 							string str = "null", fname = "null", fsurname = "null";
 							double fscore = 0;
 							string arr[50];
@@ -308,7 +274,7 @@ int main()
 							};
 							datafile.close();
 							checked++;
-							std::sort(list.begin(), list.end(), [](const Student& lhs, const Student& rhs) {return lhs.final < rhs.final;});
+							std::sort(list.begin(), list.end(), [](Student& lhs, Student& rhs) {return lhs.GetFinal() < rhs.GetFinal();});
 						};
 						cout << endl << endl << "1,000,000 Students has been added in :" << timer1000k << " seconds!" << endl;
 						cout << "---------------------------------------------" << endl;
@@ -325,7 +291,7 @@ int main()
 						if (provisional == 1) { system("CLS"); possibility = scholar.Menu(); };
 					};
 				};
-				while (possibility == 8 ) {			
+				while (possibility == 9 ) {			
 					auto start555 = std::chrono::high_resolution_clock::now();
 					cout << "Sorting students..." << endl;
 					std::deque<Student>Good;
@@ -340,30 +306,56 @@ int main()
 					std::ofstream PoorGrade("PoorGradeStudentlist.txt");
 					PoorGrade << "Name" << "\t" << "Surname" << "\t" << "FinalGrade" << "\n";
 					for (int i = 0; i < Bad.size(); i++) {
-						PoorGrade << Bad[i].name << "\t" << Bad[i].surname << "\t" << Bad[i].final << "\n";}
+						PoorGrade << Bad[i].GetName() << "\t" << Bad[i].GetSurname() << "\t" << Bad[i].GetFinal() << "\n"; }
 					PoorGrade.close();
 					auto end111 = std::chrono::high_resolution_clock::now();
 					std::chrono::duration<double>elapsed_seconds111 = end111 - start111;
 					offload = elapsed_seconds111.count();
-					cout << endl << "Poor Students List has been ganerated and offloaded in :" << offload << " seconds" << " "<<"(PoorGradeStudentlist.txt)"<< endl;
+					cout << endl << "Poor Students List of:"<< Bad.size() <<" students has been ganerated and offloaded in :" << offload << " seconds" << " "<<"(Poorlist.txt)"<< endl;
 
 					auto start222 = std::chrono::high_resolution_clock::now();
 					std::ofstream GoodGrade("GoodGradeStudentlist.txt");
 					GoodGrade << "Name" << "\t" << "Surname" << "\t" << "FinalGrade" << "\n";
 					for (int i = 0; i < Good.size(); i++) {
-						GoodGrade << Good[i].name << "\t" << Good[i].surname << "\t" << Good[i].final << "\n";
+						GoodGrade << Good[i].GetName() << "\t" << Good[i].GetSurname() << "\t" << Good[i].GetFinal() << "\n";
 					}
 					GoodGrade.close();
 					auto end222 = std::chrono::high_resolution_clock::now();
 					std::chrono::duration<double>elapsed_seconds222 = end222 - start222;
-					offload2 = elapsed_seconds222.count();
-					cout << "Good Students List has been ganerated and offloaded in :" << offload2 << " seconds"<<"(GoodGradeStudentlist.txt)"<< endl;
+					offload = elapsed_seconds222.count();
+					cout << "Good Students List of:"<< Good.size()<<" students has been ganerated and offloaded in :" << offload << " seconds"<<" "<< "(Goodlist.txt)" << endl;
 
 
 					cout << endl << "1 = Return To Main Menu" << endl;
 					cin >> provisional;
 					if (provisional == 1) { system("CLS"); possibility = scholar.Menu(); };
 				
+				};
+				while (possibility == 8) {
+					cout << "Enter student information" << endl;
+					cout << "Student name :";
+					cin >> tempname;
+					cout << "Student Surname :";
+					cin >> tempsurname;
+					for (int i = 0; i < list.size(); i++) {
+						if (list[i].GetName() == tempname && list[i].GetSurname() == tempsurname) {
+							list.erase(list.begin() + i);
+							system("CLS");
+							cout << "The Student has been found and deleted off the list" << endl;
+							break;
+
+						}
+						else if (list.size() -1 == i) {
+							system("CLS");
+							cout << "Student with provided name/surname has not been found!" << endl;
+							break;
+						}
+					};
+
+					cout << endl << "1 = Return To Main Menu" << endl;
+					cin >> provisional;
+					if (provisional == 1) { system("CLS"); possibility = scholar.Menu(); };
+
 				};
 				while (possibility == 10) { possibility = 0; };
 				}

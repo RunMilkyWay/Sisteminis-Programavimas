@@ -20,6 +20,14 @@ Student::~Student() {
 	grades.clear();
 }
 
+string Student::GetName() {
+	return name;
+};
+
+string Student::GetSurname() {
+	return surname;
+};
+
 Student::Student(const Student& p1) {
 	name = p1.name;
 	surname = p1.surname;
@@ -27,9 +35,15 @@ Student::Student(const Student& p1) {
 	final = p1.final;
 }
 
-//Student& Student::operator=(const Student& off) {
-//	
-//}
+Student& Student::operator=(const Student& og) {
+	if (this != &og) {
+		name = og.name;
+		surname = og.surname;
+		final = og.final;
+		grades = og.grades;
+	}
+	return *this;
+}
 
 void Student::DeleteGrades() {
 	grades.clear();

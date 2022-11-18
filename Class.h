@@ -4,15 +4,17 @@
 class Student {
 private:
 	std::deque<int> grades;
+	string name, surname;
+	double final;
 public:
-	double final, capture;
-	string surname;
-	string name;											
+	double capture;										
 	Student();												
 	Student(string, string, std::deque<int>, double);			
 	Student(const Student& p1);			
-	//Student& operator=(const Student& rhs); breaks sort
+	Student& operator=(const Student& og);
 	~Student();		
+	string GetName();
+	string GetSurname();
 	double GetFinal();
 	int Menu();
 	void DeleteGrades();
